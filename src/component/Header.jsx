@@ -1,205 +1,218 @@
 import React, { useState } from 'react';
-import { Phone, MapPin, Scissors, Menu, X } from 'lucide-react';
+import { Phone, MapPin, Scissors, Menu, X, Home, Image, Users, Clock } from 'lucide-react';
 
 const Header = () => {
-  const phoneNumber = "+919876543210"; // Aapka actual number
+  const phoneNumber = "+919876543210";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [copySuccess, setCopySuccess] = useState('');
+  
+  // Google Maps link
+  const locationUrl = "https://www.google.com/maps/place/Gandhi+Chowk/@28.6351584,77.0316837,20z/data=!4m9!1m2!2m1!1sMuskan+Plaler+Barber+Shop+Delhi!3m5!1s0x390d05001cacd745:0x49a8e997929f90fa!8m2!3d28.6351584!4d77.0321011!16s%2Fg%2F11x2vw2zyx?entry=ttu";
 
   // Function to handle phone call
   const handlePhoneClick = () => {
-    // Direct call functionality
     window.location.href = `tel:${phoneNumber}`;
   };
 
-  // Function to copy number to clipboard
-  const copyToClipboard = (e) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText(phoneNumber)
-      .then(() => {
-        setCopySuccess('Copied!');
-        setTimeout(() => setCopySuccess(''), 2000);
-      })
-      .catch(err => {
-        console.error('Failed to copy: ', err);
-      });
+  // Function to open location
+  const handleLocationClick = () => {
+    window.open(locationUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="px-4 py-4 md:px-8 max-w-7xl mx-auto">
-        {/* Main Header Container */}
+    <header className="bg-gradient-to-r from-gray-900 to-gray-800 text-white shadow-xl sticky top-0 z-50">
+      <div className="px-4 py-3 sm:px-6 md:px-8 max-w-7xl mx-auto">
+        
+        {/* MAIN HEADER - Top Row */}
         <div className="flex justify-between items-center">
           
-          {/* Logo Section */}
+          {/* LEFT: Shop Name & Logo */}
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-2 rounded-full">
-              <Scissors className="text-white" size={28} />
+            <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-2 rounded-full shadow-lg">
+              <Scissors className="text-white" size={26} />
             </div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-                <span className="text-yellow-600">M</span>uskan <span className="text-yellow-600">P</span>laler
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+                <span className="text-amber-400">M</span>uskan <span className="text-amber-400">G</span>ents <span className="text-amber-400">P</span>arlour
               </h1>
-              <p className="text-sm text-gray-600">Premium Barber Shop</p>
+              <div className="flex items-center gap-2 mt-1">
+                <Clock size={12} className="text-amber-300" />
+                <p className="text-xs text-gray-300">Open: Mon-Sat 9AM-8PM</p>
+              </div>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* MOBILE MENU BUTTON */}
           <button 
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-700 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          {/* Desktop Navigation & Contact */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* DESKTOP LAYOUT - Right Side */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             
-            {/* Contact Information Card */}
-            <div className="bg-gray-50 p-4 rounded-xl shadow-sm border border-gray-200">
-              <div className="flex items-center gap-6">
-                
-                {/* Location */}
-                <div className="flex items-center gap-2">
-                  <MapPin className="text-yellow-500" size={20} />
-                  <div className="text-left">
-                    <p className="text-xs text-gray-500">Visit Us</p>
-                    <p className="font-semibold text-sm">Delhi, India</p>
-                  </div>
-                </div>
-
-                <div className="h-8 w-px bg-gray-300"></div>
-
-                {/* Phone Number with Call Button */}
-                <div className="relative">
-                  <div 
-                    onClick={handlePhoneClick}
-                    className="flex items-center gap-2 cursor-pointer group"
-                  >
-                    <div className="bg-green-100 p-2 rounded-full">
-                      <Phone className="text-green-600" size={20} />
-                    </div>
-                    <div className="text-left">
-                      <p className="text-xs text-gray-500">Call Now</p>
-                      <p className="font-bold text-gray-900 group-hover:text-green-600 transition-colors">
-                        {phoneNumber}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Copy Button */}
-                  <button
-                    onClick={copyToClipboard}
-                    className="absolute -top-1 -right-1 bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded hover:bg-blue-200 transition-colors"
-                  >
-                    Copy
-                  </button>
-                  
-                  {/* Copy Success Message */}
-                  {copySuccess && (
-                    <div className="absolute top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap">
-                      ✓ {copySuccess}
-                    </div>
-                  )}
-                </div>
-
-              </div>
-            </div>
-
-            {/* Navigation Links */}
-            <nav className="flex gap-6">
-              <a href="#home" className="text-gray-700 hover:text-yellow-600 font-medium transition-colors">
-                Home
-              </a>
-              <a href="#services" className="text-gray-700 hover:text-yellow-600 font-medium transition-colors">
-                Services
-              </a>
-              <a href="#gallery" className="text-gray-700 hover:text-yellow-600 font-medium transition-colors">
-                Gallery
-              </a>
-              <a href="#contact" className="text-gray-600 hover:text-yellow-600 font-medium transition-colors">
-                Contact
-              </a>
-            </nav>
-
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-6 bg-white border-t pt-6">
-            {/* Mobile Contact Card */}
-            <div className="bg-gray-50 p-4 rounded-xl shadow-sm mb-6">
-              
-              {/* Location */}
-              <div className="flex items-center gap-3 mb-4 pb-4 border-b">
-                <MapPin className="text-yellow-500" size={20} />
-                <div>
-                  <p className="text-sm text-gray-500">Our Location</p>
-                  <p className="font-semibold">Delhi, India</p>
-                </div>
-              </div>
-
-              {/* Phone Number with Call Button */}
-              <div className="relative">
-                <div 
-                  onClick={handlePhoneClick}
-                  className="flex items-center justify-between bg-green-50 p-4 rounded-lg cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <Phone className="text-green-600" size={24} />
-                    <div>
-                      <p className="text-sm text-gray-500">Tap to Call</p>
-                      <p className="font-bold text-xl text-gray-900">{phoneNumber}</p>
-                    </div>
-                  </div>
-                  <div className="bg-green-600 text-white px-4 py-2 rounded-full">
-                    Call Now
-                  </div>
-                </div>
-                
-                {/* Copy Button for Mobile */}
-                <button
-                  onClick={copyToClipboard}
-                  className="mt-3 w-full bg-blue-50 text-blue-600 py-2 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center gap-2"
-                >
-                  <span>Copy Number</span>
-                  {copySuccess && <span className="text-green-600">✓ {copySuccess}</span>}
-                </button>
-              </div>
-            </div>
-
-            {/* Mobile Navigation Links */}
-            <nav className="space-y-4">
+            {/* NAVIGATION LINKS - First Priority */}
+            <nav className="flex gap-5">
               <a 
                 href="#home" 
-                className="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-yellow-50 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors group"
               >
-                Home
+                <Home size={18} className="group-hover:text-amber-400" />
+                <span className="font-medium">Home</span>
               </a>
               <a 
                 href="#services" 
-                className="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-yellow-50 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors group"
               >
-                Services
+                <Scissors size={18} className="group-hover:text-amber-400" />
+                <span className="font-medium">Services</span>
               </a>
               <a 
                 href="#gallery" 
-                className="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-yellow-50 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors group"
               >
-                Gallery
+                <Image size={18} className="group-hover:text-amber-400" />
+                <span className="font-medium">Gallery</span>
               </a>
               <a 
                 href="#contact" 
-                className="block py-3 px-4 bg-gray-50 rounded-lg hover:bg-yellow-50 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors group"
               >
-                Contact
+                <Users size={18} className="group-hover:text-amber-400" />
+                <span className="font-medium">Contact</span>
               </a>
             </nav>
+
+            {/* VERTICAL DIVIDER */}
+            <div className="h-8 w-px bg-gray-600"></div>
+
+            {/* CONTACT INFO */}
+            <div className="flex items-center gap-6">
+              
+              {/* LOCATION */}
+              <div 
+                onClick={handleLocationClick}
+                className="flex items-center gap-3 cursor-pointer group"
+                title="Open in Google Maps"
+              >
+                <div className="bg-blue-500/20 p-2 rounded-full group-hover:bg-blue-500/30 transition-colors">
+                  <MapPin className="text-blue-300" size={20} />
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-gray-300">Location</p>
+                  <p className="font-medium text-sm group-hover:text-blue-300 transition-colors">
+                    Gandhi Chowk
+                  </p>
+                </div>
+              </div>
+
+              {/* PHONE */}
+              <div 
+                onClick={handlePhoneClick}
+                className="flex items-center gap-3 cursor-pointer group"
+                title="Call Now"
+              >
+                <div className="bg-green-500/20 p-2 rounded-full group-hover:bg-green-500/30 transition-colors">
+                  <Phone className="text-green-300" size={20} />
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-gray-300">Call Now</p>
+                  <p className="font-bold text-sm group-hover:text-green-300 transition-colors">
+                    {phoneNumber}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* MOBILE MENU DROPDOWN */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 pt-4 border-t border-gray-700 animate-slideDown">
+            
+            {/* MOBILE NAVIGATION */}
+            <nav className="grid grid-cols-2 gap-3 mb-6">
+              <a 
+                href="#home" 
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Home className="text-amber-400 mb-2" size={24} />
+                <span className="font-medium">Home</span>
+              </a>
+              <a 
+                href="#services" 
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Scissors className="text-amber-400 mb-2" size={24} />
+                <span className="font-medium">Services</span>
+              </a>
+              <a 
+                href="#gallery" 
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Image className="text-amber-400 mb-2" size={24} />
+                <span className="font-medium">Gallery</span>
+              </a>
+              <a 
+                href="#contact" 
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Users className="text-amber-400 mb-2" size={24} />
+                <span className="font-medium">Contact</span>
+              </a>
+            </nav>
+
+            {/* MOBILE CONTACT INFO */}
+            <div className="space-y-4">
+              
+              {/* LOCATION CARD */}
+              <div 
+                onClick={handleLocationClick}
+                className="flex items-center justify-between bg-gradient-to-r from-blue-900/30 to-blue-800/30 p-4 rounded-xl border border-blue-700/30 cursor-pointer active:scale-[0.98] transition-transform"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-blue-500 p-2 rounded-full">
+                    <MapPin className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <p className="font-medium">Our Location</p>
+                    <p className="text-sm text-gray-300">Gandhi Chowk, Delhi</p>
+                  </div>
+                </div>
+                <span className="text-blue-300 text-sm">Map →</span>
+              </div>
+
+              {/* PHONE CARD */}
+              <div 
+                onClick={handlePhoneClick}
+                className="flex items-center justify-between bg-gradient-to-r from-green-900/30 to-green-800/30 p-4 rounded-xl border border-green-700/30 cursor-pointer active:scale-[0.98] transition-transform"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-green-500 p-2 rounded-full">
+                    <Phone className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <p className="font-medium">Call Now</p>
+                    <p className="text-sm text-gray-300">{phoneNumber}</p>
+                  </div>
+                </div>
+                <span className="text-green-300 text-sm">Call →</span>
+              </div>
+            </div>
+
+            {/* TIMING INFO */}
+            <div className="mt-6 pt-4 border-t border-gray-700">
+              <div className="flex items-center justify-center gap-2 text-amber-300">
+                <Clock size={16} />
+                <p className="text-sm">Timing: Mon-Sat 9:00 AM - 8:00 PM</p>
+              </div>
+            </div>
           </div>
         )}
       </div>
