@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Header from './component/Header'
 import Hero from './component/Hero'
+import Footer from './component/Footer'
 
 
 
@@ -13,6 +14,7 @@ function App() {
     <>
       <Header></Header>
       <Hero></Hero>
+      <Footer></Footer>
      
       
       
