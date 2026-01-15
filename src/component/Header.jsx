@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Phone, MapPin, Scissors, Menu, X, Home, Image, Users, Clock } from 'lucide-react';
 
 const Header = () => {
-  const phoneNumber = "+919876543210";
+  const phoneNumber = "+919142635439";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Google Maps link
