@@ -2,7 +2,7 @@ import React from 'react';
 import { Phone, MapPin, Clock, Scissors } from 'lucide-react';
 
 const Footer = () => {
-  const phoneNumber = "+919876543210";
+  const phoneNumber = "+919142635439";
   
   // Phone call function
   const handlePhoneCall = () => {
